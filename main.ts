@@ -38,15 +38,14 @@ let TubeTab: number [] = [
  * Grove Gestures
  */
 enum GroveGesture {
-    //% block=None
-    None = 0,
-    //% block=Right
+
+    //% block=→ Right
     Right = 1,
-    //% block=Left
+    //% block=← Left
     Left = 2,
-    //% block=Up
+    //% block=↑ Up
     Up = 3,
-    //% block=Down
+    //% block=↓ Down
     Down = 4,
     //% block=Forward
     Forward = 5,
@@ -61,15 +60,14 @@ enum GroveGesture {
 }
 
 enum GroveJoystickKey {
-    //% block="None"
-    None = 0,
-    //% block="Right"
+
+    //% block="→ Right"
     Right = 1,
-    //% block="Left"
+    //% block="← Left"
     Left = 2,
-    //% block="Up"
+    //% block="↑ Up"
     Up = 3,
-    //% block="Down"
+    //% block="↓ Down"
     Down = 4,
     //% block="Upper left"
     UL = 5,
@@ -91,10 +89,32 @@ enum GrovePin {
     //% block="P2"
     P2 = DigitalPin.P2,
     //% block="P8"
+    P3 = DigitalPin.P3,
+    //% block="P8"
+    P4 = DigitalPin.P4,
+    //% block="P8"
+    P5 = DigitalPin.P5,
+    //% block="P8"
+    P6 = DigitalPin.P6,
+    //% block="P8"
+    P7 = DigitalPin.P7,
+    //% block="P8"
     P8 = DigitalPin.P8,
     //% block="P12"
+    P9 = DigitalPin.P9,
+    //% block="P8"
+    P10 = DigitalPin.P10,
+    //% block="P8"
+    P11 = DigitalPin.P11,
+    //% block="P8"
     P12 = DigitalPin.P12,
     //% block="P16"
+    P13 = DigitalPin.P13,
+    //% block="P8"
+    P14 = DigitalPin.P14,
+    //% block="P8"
+    P15 = DigitalPin.P15,
+    //% block="P8"
     P16 = DigitalPin.P16
 }
 
@@ -104,7 +124,10 @@ enum GroveAnalogPin {
     //% block="P1"
     P1 = AnalogPin.P1,
     //% block="P2"
-    P2 = AnalogPin.P2
+    P2 = AnalogPin.P2,
+    P3 = AnalogPin.P3,
+    P4 = AnalogPin.P4,
+    P10 = AnalogPin.P10
 }
 
 enum DistanceUnit {
@@ -464,11 +487,11 @@ namespace grove {
                 else {
                     if (ydata > 600) result = GroveJoystickKey.Up;
                     else if (ydata < 400) result = GroveJoystickKey.Down;
-                    else result = GroveJoystickKey.None;
+                    else result = GroveJoystickKey.Right;
                 }
             }
             else {
-                result =  GroveJoystickKey.None;
+                result =  GroveJoystickKey.Right;
             }
             return result;
         }
@@ -476,8 +499,8 @@ namespace grove {
     
     const gestureEventId = 3100;
     const joystickEventID = 3101;
-    let lastGesture = GroveGesture.None;
-    let lastJoystick = GroveJoystickKey.None;
+    let lastGesture = GroveGesture.Right;
+    let lastJoystick = GroveJoystickKey.Right;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let paj7620 = new PAJ7620();
@@ -498,7 +521,7 @@ namespace grove {
     }
 
     /**
-    * Turn on or off the mini fan motor
+    * Turn ON or OFF mini fan motor at specified Grove port
     */
     //% blockId=grove_minifanOnOff
     //% block="Mini Fan$groveport|: turn $on"
@@ -533,7 +556,7 @@ namespace grove {
 
 
         /**
-    * Read the sound sensor value at specified Grove port, the value is between 0 to 1023
+    * Read the sound sensor value from specified Grove port, the value is between 0 to 1023
     */
     //% blockId=grove_soundsensor
     //% block="Sound Sensor $analogport|: value"
@@ -563,7 +586,7 @@ namespace grove {
     }
 
     /**
-    * Read the loudness sensor value at specified Grove port, the value is between 0 to 1023
+    * Read the loudness sensor value from specified Grove port, the value is between 0 to 1023
     */
     //% blockId=grove_loudnesssensor
     //% block="Loudness Sensor $analogport|: value"
@@ -582,7 +605,7 @@ namespace grove {
     }
 
     /**
-    * Get the distance from Grove-Ultrasonic Sensor, the measuring range is between 2-350cm
+    * This block for micrGet the distance from Ultrasonic Sensor, the measuring range is between 2-350cm
     */
     //% blockId=grove_ultrasonic
     //% block="Ultrasonic Sensor $groveport|: distance in $Unit"
@@ -612,7 +635,7 @@ namespace grove {
         return distance;
     }
     /**
-    * Get the distance from Grove-Ultrasonic Sensor, the measuring range is between 2-350cm
+    * (For micro:bit V2 ONLY)Get the distance from Grove-Ultrasonic Sensor, the measuring range is between 2-350cm
     */
     //% blockId=grove_ultrasonic_v2
     //% block="(V2)Ultrasonic Sensor $groveport|: distance in $Unit"
@@ -643,132 +666,6 @@ namespace grove {
     }
 
 
-
-
-
-
-
-    /**
-     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
-     * @param pin signal pin of ultrasonic ranger module
-     */
-    //% blockId=grove_ultrasonic_centimeters_v2 block="(V2)Ultrasonic Sensor (in cm) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    //% group="Ultrasonic" pin.defl=DigitalPin.C16
-
-    export function measureInCentimetersV2(pin: DigitalPin): number
-    {
-        let duration = 0;
-        let RangeInCentimeters = 0;
-        
-        pins.digitalWritePin(pin, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(pin, 1);
-        control.waitMicros(20);
-        pins.digitalWritePin(pin, 0);        
-        duration = pins.pulseIn(pin, PulseValue.High, 50000); // Max duration 50 ms
-
-        RangeInCentimeters = duration * 153 / 44 / 2 / 100 ;
-               
-        if(RangeInCentimeters > 0) distanceBackup = RangeInCentimeters;
-        else RangeInCentimeters = distanceBackup;
-
-        basic.pause(50);
-        
-        return RangeInCentimeters;
-    }
-    
-     /**
-     * Create a new driver Grove - Ultrasonic Sensor to measure distances in inch
-     * @param pin signal pin of ultrasonic ranger module
-     */
-    //% blockId=grove_ultrasonic_inches_v2 block="(V2)Ultrasonic Sensor (in inch) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    //% group="Ultrasonic" pin.defl=DigitalPin.C16
-    export function measureInInchesV2(pin: DigitalPin): number
-    {
-        let duration = 0;
-        let RangeInInches = 0;
-        
-        pins.digitalWritePin(pin, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(pin, 1);
-        control.waitMicros(20);
-        pins.digitalWritePin(pin, 0);
-        duration = pins.pulseIn(pin, PulseValue.High, 100000); // Max duration 100 ms
-        
-        RangeInInches = duration * 153 / 113 / 2 / 100;
-        
-        if(RangeInInches > 0) distanceBackup = RangeInInches;
-        else RangeInInches = distanceBackup;
-        
-        basic.pause(50);
-        
-        return RangeInInches;
-    }
-    
-    /**
-     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
-     * @param pin signal pin of ultrasonic ranger module
-     */
-    //% blockId=grove_ultrasonic_centimeters block="Ultrasonic Sensor (in cm) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    //% group="Ultrasonic" pin.defl=DigitalPin.C16
-
-    export function measureInCentimeters(pin: DigitalPin): number
-    {
-        let duration = 0;
-        let RangeInCentimeters = 0;
-        
-        pins.digitalWritePin(pin, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(pin, 1);
-        control.waitMicros(20);
-        pins.digitalWritePin(pin, 0);        
-        duration = pins.pulseIn(pin, PulseValue.High, 50000); // Max duration 50 ms
-
-        RangeInCentimeters = duration * 153 / 29 / 2 / 100;
-               
-        if(RangeInCentimeters > 0) distanceBackup = RangeInCentimeters;
-        else RangeInCentimeters = distanceBackup;
-
-        basic.pause(50);
-        
-        return RangeInCentimeters;
-    }
-    
-    /**
-     * Create a new driver Grove - Ultrasonic Sensor to measure distances in inch
-     * @param pin signal pin of ultrasonic ranger module
-     */
-    //% blockId=grove_ultrasonic_inches block="Ultrasonic Sensor (in inch) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.tooltips="false" pin.fieldOptions.width="250"
-    //% group="Ultrasonic" pin.defl=DigitalPin.C16
-    export function measureInInches(pin: DigitalPin): number
-    {
-        let duration = 0;
-        let RangeInInches = 0;
-        
-        pins.digitalWritePin(pin, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(pin, 1);
-        control.waitMicros(20);
-        pins.digitalWritePin(pin, 0);        
-        duration = pins.pulseIn(pin, PulseValue.High, 100000); // Max duration 100 ms
-        
-        RangeInInches = duration * 153 / 74 / 2 / 100;
-        
-        if(RangeInInches > 0) distanceBackup = RangeInInches;
-        else RangeInInches = distanceBackup;
-        
-        basic.pause(50);
-        
-        return RangeInInches;
-    }
     
     /**
      * Create a new Grove - 4-Digit Display driver at specified ports
@@ -797,40 +694,30 @@ namespace grove {
         return display;
     }
  
-    /**
-     * init Grove Gesture modules
-     * 
-     */
-    //% blockId=grove_initgesture block="init gesture"
-    //% group="Gesture"
-    export function initGesture() {
-        if (!paj7620) {
-            paj7620.init();
-        }
-    }
 
     /**
-     * get Grove Gesture model
+     * Get the gesture sensor value, 0 refers to none detected, 1 - 9 represents 9 diffrent gestures
      * 
      */
     //% blockId=grove_getgesture block="get gesture model"
     //% group="Gesture"
     export function getGestureModel(): number {
+        paj7620.init();
         return paj7620.read();
     }
     /**
-     * get Joystick key
+     * Do something when the joystick is pushed to a specified direction
      * 
      */
-    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%ypin"
+    //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin"
     //% group="Thumbjoystick" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
         return joystick.joyread(xpin, ypin);
     }
 
    /**
-     * Converts the gesture name to a number
-     * Useful for comparisons
+     * Check if a specified gesture is detected and return as "Ture" or "False"
+     * 
      */
     //% blockId=ggesture block="%key"
     //% group="Gesture"
@@ -839,7 +726,7 @@ namespace grove {
     }
     
     /**
-     * Do something when a gesture is detected by Grove - Gesture
+     * Do something when a specified gesture is detected
      * @param gesture type of gesture to detect
      * @param handler code to run
      */
@@ -871,7 +758,7 @@ namespace grove {
     }
 
     /**
-     * Do something when a key is detected by Grove - Thumb Joystick
+     * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
      * @param key type of joystick to detect
      * @param xpin
      * @param ypin
@@ -897,7 +784,7 @@ namespace grove {
 
     let isWifiConnected = false;
     /**
-     * Setup Grove - Uart WiFi V2 to connect to  Wi-Fi
+     * Set up Grove - Uart WiFi V2 to connect to  Wi-Fi
      */
     //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd"
     //% group="UartWiFi"
@@ -986,7 +873,7 @@ namespace grove {
     }
 
     /**
-     * Send data to IFTTT
+     * Check if Grove - UART WIFI V2 IS CONNECTED TO WIFI
      */
     //% block="Send Data to your IFTTT Event|Event %event|Key %key|value1 %value1|value2 %value2|value3 %value3"
     //% group="UartWiFi"
