@@ -282,7 +282,7 @@ namespace grove {
         } 
 
         /**
-         * Show a 4 digits number on display
+         * Show a number on the 4 digit display
          * @param dispData value of number
          */
 
@@ -356,10 +356,10 @@ namespace grove {
         }
         
         /**
-         * Set the brightness level of display at from 0 to 7
+         * Set the brightness level of 4 digit display
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block="%4Digit|brightness level to|%level"
+        //% blockId=grove_tm1637_set_display_level block="%4Digit|set brightness to|%level"
         //% level.min=0 level.max=7
         //% group="4-Digit"
         set(level: number)
@@ -373,11 +373,11 @@ namespace grove {
         }
         
         /**
-         * Show a single number from 0 to 9 at a specified digit of Grove - 4-Digit Display
+         * Show a single digit at specified bit of the Digit Display
          * @param dispData value of number
          * @param bitAddr value of bit number
          */
-        //% blockId=grove_tm1637_display_bit block="%4Digit|show single number|%dispData|at digit|%bitAddr"
+        //% blockId=grove_tm1637_display_bit block="%4Digit|show digit|%dispData|at bit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
         //% group="4-Digit"
@@ -404,10 +404,10 @@ namespace grove {
         }
         
         /**
-         * Turn on or off the colon point on Grove - 4-Digit Display
+         * Turn ON or OFF the colon of the 4 Digit Display
          * @param pointEn value of point switch
          */
-        //% blockId=grove_tm1637_display_point block="%4Digit|turn|%point|colon point"
+        //% blockId=grove_tm1637_display_point block="%4Digit|colon|%point"
         //% group="4-Digit"
         point(point: boolean)
         {
@@ -420,9 +420,9 @@ namespace grove {
         }
         
         /**
-         * Clear the display
+         * Turn off all segments the 4 digit display
          */
-        //% blockId=grove_tm1637_display_clear block="%4Digit|clear"
+        //% blockId=grove_tm1637_display_clear block="%4Digit|off"
         //% group="4-Digit"
         clear()
         {
@@ -771,7 +771,7 @@ namespace grove {
     }
     
     /**
-     * Create a new driver Grove - 4-Digit Display
+     * Create a new Grove - 4-Digit Display driver at specified ports
      * @param clkPin value of clk pin number
      * @param dataPin value of data pin number
      */
