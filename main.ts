@@ -751,15 +751,6 @@ namespace grove {
         })
     }
 
-    /**
-     * Converts the key name to a number
-     * Useful for comparisons
-     */
-    //% blockId=joystickkey block="%key"
-    //% group="Thumbjoystick"
-    export function joystickkey(key: GroveJoystickKey): number {
-        return key;
-    }
 
     /**
      * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
