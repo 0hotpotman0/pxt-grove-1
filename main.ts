@@ -383,7 +383,7 @@ namespace grove {
          * Set the brightness level of 4 digit display
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block=4-Digit Display: |"%4Digit|set brightness to|%level"
+        //% blockId=grove_tm1637_set_display_level block="4-Digit Display: |%4Digit|set brightness to|%level"
         //% level.min=0 level.max=7
         //% group="4-Digit Display"
         set(level: number)
@@ -446,7 +446,7 @@ namespace grove {
         /**
          * Turn off all segments the 4 digit display
          */
-        //% blockId=grove_tm1637_display_clear block="%4Digit|off"
+        //% blockId=grove_tm1637_display_clear block="4-Digit Display: |%4Digit|off"
         //% group="4-Digit Display"
         clear()
         {
