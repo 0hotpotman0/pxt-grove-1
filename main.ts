@@ -47,15 +47,15 @@ enum GroveGesture {
     Up = 3,
     //% block="↓ Down"
     Down = 4,
-    //% block=Forward
+    //% block="Forward"
     Forward = 5,
-    //% block=Backward
+    //% block="Backward"
     Backward = 6,
-    //% block=Clockwise
+    //% block="Clockwise"
     Clockwise = 7,
-    //% block=Anticlockwise
+    //% block="Anticlockwise"
     Anticlockwise = 8,
-    //% block=Wave
+    //% block="Wave"
     Wave = 9
 }
 
