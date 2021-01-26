@@ -39,23 +39,23 @@ let TubeTab: number [] = [
  */
 enum GroveGesture {
 
-    //% block="→ Right"
+    //% block="swipe Right"
     Right = 1,
-    //% block="← Left"
+    //% block="swipe Left"
     Left = 2,
-    //% block="↑ Up"
+    //% block="swipe Up"
     Up = 3,
-    //% block="↓ Down"
+    //% block="swipe Down"
     Down = 4,
-    //% block="Forward"
+    //% block="object close"
     Forward = 5,
-    //% block="Backward"
+    //% block="object away"
     Backward = 6,
-    //% block="Clockwise"
+    //% block="circle-CW"
     Clockwise = 7,
-    //% block="Anticlockwise"
+    //% block="circle-CCW"
     Anticlockwise = 8,
-    //% block="Wave"
+    //% block="finger waving"
     Wave = 9
 }
 
@@ -141,7 +141,8 @@ enum DistanceUnit {
  * Functions to operate Grove module.
  */
 //% weight=10 color=#9F79EE icon="\uf1b3" block="Grove"
-//% groups='["4-Digit","Ultrasonic","Motor","Sensor","Gesture","Thumbjoystick","UartWiFi"]'
+//% groups='["4-Digit Display","Ultrasonic Sensor","Sound Sensor","Loudness Sensor","Gesture Sensor","Thumb Joystick","Mini Fan","Servo","UART WiFi"]'
+
 namespace grove {
     /**
      * 
@@ -309,8 +310,8 @@ namespace grove {
          * @param dispData value of number
          */
 
-        //% blockId=grove_tm1637_display_number block="%4Digit|show number|%dispData"
-        //% group="4-Digit"
+        //% blockId=grove_tm1637_display_number block="4-Digit Display: |%4Digit|show number|%dispData"
+        //% group="4-Digit Display"
         show(dispData: number)
         {       
             let compare_01:number = dispData % 100;
@@ -384,7 +385,7 @@ namespace grove {
          */
         //% blockId=grove_tm1637_set_display_level block="%4Digit|set brightness to|%level"
         //% level.min=0 level.max=7
-        //% group="4-Digit"
+        //% group="4-Digit Display"
         set(level: number)
         {
             this.brightnessLevel = level;
@@ -403,7 +404,7 @@ namespace grove {
         //% blockId=grove_tm1637_display_bit block="%4Digit|show digit|%dispData|at bit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
-        //% group="4-Digit"
+        //% group="4-Digit Display"
         bit(dispData: number, bitAddr: number)
         {
             if((dispData == 0x7f) || ((dispData <= 9) && (bitAddr <= 3)))
@@ -431,7 +432,7 @@ namespace grove {
          * @param pointEn value of point switch
          */
         //% blockId=grove_tm1637_display_point block="%4Digit|colon|%point"
-        //% group="4-Digit"
+        //% group="4-Digit Display"
         point(point: boolean)
         {
             this.pointFlag = point;
@@ -446,7 +447,7 @@ namespace grove {
          * Turn off all segments the 4 digit display
          */
         //% blockId=grove_tm1637_display_clear block="%4Digit|off"
-        //% group="4-Digit"
+        //% group="4-Digit Display"
         clear()
         {
             this.bit(0x7f, 0x00);
@@ -506,19 +507,6 @@ namespace grove {
     let paj7620 = new PAJ7620();
     // adapted to Calliope mini V2 Core by M.Klein 17.09.2020
     
-    /**
-    * Set the speed of mini fan, the speed is between 0 to 100
-    */
-    //% blockId=grove_minifan
-    //% block="Mini Fan$analogport|: set speed to $speed \\%"
-    //% speed.min=0 speed.max=100
-    //% speed.defl=50
-    //% group="Motor"
-    //% weight=100
-    export function grove_minifan(analogport: GroveAnalogPin, speed: number) {
-        let port: number = analogport;
-        pins.analogWritePin(<AnalogPin>port, pins.map(speed, 0, 100, 0, 1023));
-    }
 
     /**
     * Turn ON or OFF mini fan motor at specified Grove port
@@ -527,7 +515,7 @@ namespace grove {
     //% block="Mini Fan$groveport|: turn $on"
     //% on.shadow="toggleOnOff"
     //% on.defl="true"
-    //% group="Motor"
+    //% group="Mini Fan"
     //% weight=100
     export function grove_minifanOnOff(groveport: GrovePin, on: boolean) {
         let port: number = groveport;
@@ -545,7 +533,7 @@ namespace grove {
     //% block="Servo$analogport|: set angle to $angle|°"
     //% angle.min=0 angle.max=180
     //% angle.defl=90
-    //% group="Motor"
+    //% group="Servo"
     //% weight=99
     export function grove_servo(analogport: GroveAnalogPin, angle: number) {
         let port: number = analogport;
@@ -560,7 +548,7 @@ namespace grove {
     */
     //% blockId=grove_soundsensor
     //% block="Sound Sensor $analogport|: value"
-    //% group="Sensor"
+    //% group="Sound Sensor"
     //% weight=80
     export function grove_soundsensor(analogport: GroveAnalogPin): number {
         let port: number = analogport;
@@ -590,7 +578,7 @@ namespace grove {
     */
     //% blockId=grove_loudnesssensor
     //% block="Loudness Sensor $analogport|: value"
-    //% group="Sensor"
+    //% group="Loudness Sensor"
     //% weight=79
     export function grove_loudnesssensor(analogport: GroveAnalogPin): number {
         let port: number = analogport;
@@ -609,7 +597,7 @@ namespace grove {
     */
     //% blockId=grove_ultrasonic
     //% block="Ultrasonic Sensor $groveport|: distance in $Unit"
-    //% group="Sensor"
+    //% group="Ultrasonic Sensor"
     //% weight=78
     export function grove_ultrasonic(groveport: GrovePin, Unit: DistanceUnit): number {
         let duration = 0;
@@ -639,7 +627,7 @@ namespace grove {
     */
     //% blockId=grove_ultrasonic_v2
     //% block="(V2)Ultrasonic Sensor $groveport|: distance in $Unit"
-    //% group="Sensor"
+    //% group="Ultrasonic Sensor"
     //% weight=77
     export function grove_ultrasonic_v2(groveport: GrovePin, Unit: DistanceUnit): number {
         let duration = 0;
@@ -674,7 +662,7 @@ namespace grove {
      */
     //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|and|%dataPin"
     //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=4
-    //% group="4-Digit"
+    //% group="4-Digit Display"
     //% clkPin.fieldOptions.tooltips="false" clkPin.fieldOptions.width="250"
     //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=4
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
@@ -700,7 +688,7 @@ namespace grove {
      * 
      */
     //% blockId=grove_getgesture block="get gesture model"
-    //% group="Gesture"
+    //% group="Gesture Sensor"
     export function getGestureModel(): number {
         paj7620.init();
         return paj7620.read();
@@ -710,7 +698,7 @@ namespace grove {
      * 
      */
     //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin"
-    //% group="Thumbjoystick" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
+    //% group="Thumb Joystick" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
         return joystick.joyread(xpin, ypin);
     }
@@ -720,7 +708,7 @@ namespace grove {
      * 
      */
     //% blockId=ggesture block="%key"
-    //% group="Gesture"
+    //% group="Gesture Sensor"
     export function ggesture(g: GroveGesture): boolean {
         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  ){
             return true;
@@ -735,7 +723,7 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
-    //% group="Gesture"
+    //% group="Gesture Sensor"
     export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
@@ -760,7 +748,7 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_joystick_create_event block="on Key|%key at |%xpin|and|%ypin"
-    //% group="Thumbjoystick" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
+    //% group="Thumb Joystick" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
 
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
@@ -782,7 +770,7 @@ namespace grove {
      * Set up Grove - Uart WiFi V2 to connect to  Wi-Fi
      */
     //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd"
-    //% group="UartWiFi"
+    //% group="UART WiFi"
     //% txPin.defl=SerialPin.P15
     //% rxPin.defl=SerialPin.P1
     //% baudRate.defl=BaudRate.BaudRate115200
@@ -815,7 +803,7 @@ namespace grove {
      * Check if Grove - Uart WiFi V2 is connected to Wifi
      */
     //% block="Wifi OK?"
-    //% group="UartWiFi"
+    //% group="UART WiFi"
     export function wifiOK() {
         return isWifiConnected
     }
@@ -824,7 +812,7 @@ namespace grove {
      * Send data to ThinkSpeak
      */
     //% block="Send Data to your ThinkSpeak Channel|Write API Key %apiKey|Field1 %field1|Field2 %field2|Field3 %field3|Field4 %field4|Field5 %field5|Field6 %field6|Field7 %field7|Field8 %field8"
-    //% group="UartWiFi"
+    //% group="UART WiFi"
     //% apiKey.defl="your Write API Key"
     export function sendToThinkSpeak(apiKey: string, field1: number, field2: number, field3: number, field4: number, field5: number, field6: number, field7: number, field8: number) {
         let result = 0
@@ -871,7 +859,7 @@ namespace grove {
      * Check if Grove - UART WIFI V2 IS CONNECTED TO WIFI
      */
     //% block="Send Data to your IFTTT Event|Event %event|Key %key|value1 %value1|value2 %value2|value3 %value3"
-    //% group="UartWiFi"
+    //% group="UART WiFi"
     //% event.defl="your Event"
     //% key.defl="your Key"
     //% value1.defl="hello"
