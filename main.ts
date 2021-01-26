@@ -383,7 +383,7 @@ namespace grove {
          * Set the brightness level of 4 digit display
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block="%4Digit|set brightness to|%level"
+        //% blockId=grove_tm1637_set_display_level block=4-Digit Display: |"%4Digit|set brightness to|%level"
         //% level.min=0 level.max=7
         //% group="4-Digit Display"
         set(level: number)
@@ -401,7 +401,7 @@ namespace grove {
          * @param dispData value of number
          * @param bitAddr value of bit number
          */
-        //% blockId=grove_tm1637_display_bit block="%4Digit|show digit|%dispData|at bit|%bitAddr"
+        //% blockId=grove_tm1637_display_bit block="4-Digit Display: |%4Digit|show digit|%dispData|at bit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
         //% group="4-Digit Display"
@@ -431,7 +431,7 @@ namespace grove {
          * Turn ON or OFF the colon of the 4 Digit Display
          * @param pointEn value of point switch
          */
-        //% blockId=grove_tm1637_display_point block="%4Digit|colon|%point"
+        //% blockId=grove_tm1637_display_point block="4-Digit Display: |%4Digit|colon|%point"
         //% group="4-Digit Display"
         point(point: boolean)
         {
