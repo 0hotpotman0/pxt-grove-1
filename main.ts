@@ -88,33 +88,33 @@ enum GrovePin {
     P1 = DigitalPin.P1,
     //% block="P2"
     P2 = DigitalPin.P2,
-    //% block="P8"
+    //% block="P3"
     P3 = DigitalPin.P3,
-    //% block="P8"
+    //% block="P4"
     P4 = DigitalPin.P4,
-    //% block="P8"
+    //% block="P5"
     P5 = DigitalPin.P5,
-    //% block="P8"
+    //% block="P6"
     P6 = DigitalPin.P6,
-    //% block="P8"
+    //% block="P7"
     P7 = DigitalPin.P7,
     //% block="P8"
     P8 = DigitalPin.P8,
-    //% block="P12"
+    //% block="P9"
     P9 = DigitalPin.P9,
-    //% block="P8"
+    //% block="P10"
     P10 = DigitalPin.P10,
-    //% block="P8"
+    //% block="P11"
     P11 = DigitalPin.P11,
-    //% block="P8"
+    //% block="P12"
     P12 = DigitalPin.P12,
-    //% block="P16"
+    //% block="P13"
     P13 = DigitalPin.P13,
-    //% block="P8"
+    //% block="P14"
     P14 = DigitalPin.P14,
-    //% block="P8"
+    //% block="P15"
     P15 = DigitalPin.P15,
-    //% block="P8"
+    //% block="P16"
     P16 = DigitalPin.P16
 }
 
@@ -125,8 +125,11 @@ enum GroveAnalogPin {
     P1 = AnalogPin.P1,
     //% block="P2"
     P2 = AnalogPin.P2,
+    //% block="P3"
     P3 = AnalogPin.P3,
+    //% block="P4"
     P4 = AnalogPin.P4,
+    //% block="P10"
     P10 = AnalogPin.P10
 }
 
