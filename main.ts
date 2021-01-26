@@ -39,13 +39,13 @@ let TubeTab: number [] = [
  */
 enum GroveGesture {
 
-    //% block=→ Right
+    //% block="→ Right"
     Right = 1,
-    //% block=← Left
+    //% block="← Left"
     Left = 2,
-    //% block=↑ Up
+    //% block="↑ Up"
     Up = 3,
-    //% block=↓ Down
+    //% block="↓ Down"
     Down = 4,
     //% block=Forward
     Forward = 5,
