@@ -506,11 +506,15 @@ namespace grove {
 
 
 
-        /**
+    /**
     * Read the sound sensor value from specified Grove port, the value is between 0 to 1023
+    * @param analogport value of clk pin number
     */
     //% blockId=grove_soundsensor
     //% block="Sound Sensor $analogport|: value"
+    //% analogport.fieldEditor="gridpicker" analogport.fieldOptions.columns=4
+    //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
+    //% analogport.defl=DigitalPin.C16
     //% group="Sensor"
     //% weight=80
     export function grove_soundsensor(analogport: GroveAnalogPin): number {
@@ -538,9 +542,13 @@ namespace grove {
 
     /**
     * Read the loudness sensor value from specified Grove port, the value is between 0 to 1023
+    * @param analogport value of clk pin number
     */
     //% blockId=grove_loudnesssensor
     //% block="Loudness Sensor $analogport|: value"
+    //% analogport.fieldEditor="gridpicker" analogport.fieldOptions.columns=4
+    //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
+    //% analogport.defl=DigitalPin.C16
     //% group="Sensor"
     //% weight=79
     export function grove_loudnesssensor(analogport: GroveAnalogPin): number {
@@ -695,6 +703,9 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
+    //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
+    //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
+    
     //% group="Sensor"
     export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
