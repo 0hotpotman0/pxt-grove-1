@@ -520,7 +520,7 @@ namespace grove {
     //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
     //% analogport.defl=DigitalPin.C16
     //% group="Sensor"
-    //% weight=80
+    //% weight=800
     export function grove_soundsensor(analogport: GroveAnalogPin): number {
         let port: number = analogport;
         // amplify the raw data with index value
@@ -554,7 +554,7 @@ namespace grove {
     //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
     //% analogport.defl=DigitalPin.C16
     //% group="Sensor"
-    //% weight=79
+    //% weight=700
     export function grove_loudnesssensor(analogport: GroveAnalogPin): number {
         let port: number = analogport;
         let result: number =0;
@@ -577,7 +577,7 @@ namespace grove {
     //% groveport.fieldOptions.tooltips="false" groveport.fieldOptions.width="250"
     //% groveport.defl=DigitalPin.C16
     //% group="Sensor"  
-    //% weight=78
+    //% weight=1000
     export function grove_ultrasonic(groveport: GrovePin, Unit: DistanceUnit): number {
         let duration = 0;
         let distance = 0;
@@ -611,7 +611,7 @@ namespace grove {
     //% groveport.fieldOptions.tooltips="false" groveport.fieldOptions.width="250"
     //% groveport.defl=DigitalPin.C16
     //% group="Sensor"
-    //% weight=77
+    //% weight=900
     export function grove_ultrasonic_v2(groveport: GrovePin, Unit: DistanceUnit): number {
         let duration = 0;
         let distance = 0;
@@ -673,6 +673,7 @@ namespace grove {
      */
     //% blockId=grove_getgesture block="get gesture model"
     //% group="Sensor"
+    //% weight=500
     export function getGestureModel(): number {
         paj7620.init();
         return paj7620.read();
@@ -687,21 +688,25 @@ namespace grove {
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
+    //% weight=300
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
         return joystick.joyread(xpin, ypin);
     }
 
    /**
-     * Check if a specified gesture 
-     * is detected and return as "Ture" or "False"
+     * Check if a specified gesture is detected and return as "Ture" or "False"
+     * @param g type of g to detect
      */
     //% blockId=ggesture block="%key"
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=3
     //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
     //% group="Sensor"
-    export function ggesture(g: GroveGesture): number {
-        
-             return g;
+    //% weight=400
+    export function ggesture(g: GroveGesture): boolean {
+        if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
+            return true;
+        else
+             return false;
     }
     
     /**
@@ -713,6 +718,7 @@ namespace grove {
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
+    //% weight=600
     export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
@@ -744,7 +750,7 @@ namespace grove {
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
-
+    //% weight=200
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
@@ -773,6 +779,7 @@ namespace grove {
     //% txPin.defl=SerialPin.P15
     //% rxPin.defl=SerialPin.P1
     //% baudRate.defl=BaudRate.BaudRate115200
+    //% weight=5
     export function setupWifi(txPin: SerialPin, rxPin: SerialPin, baudRate: BaudRate, ssid: string, passwd: string) {
         let result = 0
 
@@ -803,6 +810,7 @@ namespace grove {
      */
     //% block="Wifi OK?"
     //% group="Communication"
+    //% weight=4
     export function wifiOK() {
         return isWifiConnected
     }
@@ -813,6 +821,7 @@ namespace grove {
     //% block="Send Data to your ThinkSpeak Channel|Write API Key %apiKey|Field1 %field1|Field2 %field2|Field3 %field3|Field4 %field4|Field5 %field5|Field6 %field6|Field7 %field7|Field8 %field8"
     //% group="Communication"
     //% apiKey.defl="your Write API Key"
+    //% weight=1
     export function sendToThinkSpeak(apiKey: string, field1: number, field2: number, field3: number, field4: number, field5: number, field6: number, field7: number, field8: number) {
         let result = 0
         let retry = 2
@@ -855,7 +864,7 @@ namespace grove {
     }
 
     /**
-     * Check if Grove - UART WIFI V2 IS CONNECTED TO WIFI
+     * Send data to IFTTT
      */
     //% block="Send Data to your IFTTT Event|Event %event|Key %key|value1 %value1|value2 %value2|value3 %value3"
     //% group="Communication"
@@ -864,6 +873,7 @@ namespace grove {
     //% value1.defl="hello"
     //% value2.defl="micro"
     //% value3.defl="bit"
+    //% weight=2
     export function sendToIFTTT(event: string, key: string, value1: string, value2: string, value3: string) {
         let result = 0
         let retry = 2
