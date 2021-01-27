@@ -476,6 +476,8 @@ namespace grove {
     */
     //% blockId=grove_minifanOnOff
     //% block="Mini Fan$groveport|: turn $on"
+    //% groveport.fieldEditor="gridpicker" groveport.fieldOptions.columns=4
+    //% groveport.fieldOptions.tooltips="false" groveport.fieldOptions.width="250"
     //% on.shadow="toggleOnOff"
     //% on.defl="true"
     //% group="Motor"
@@ -494,6 +496,8 @@ namespace grove {
     */
     //% blockId=grove_servo
     //% block="Servo$analogport|: set angle to $angle|°"
+    //% analogport.fieldEditor="gridpicker" analogport.fieldOptions.columns=4
+    //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
     //% angle.min=0 angle.max=180
     //% angle.defl=90
     //% group="Motor" 
@@ -678,6 +682,10 @@ namespace grove {
      * 
      */
     //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin"
+    //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
+    //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
+    //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
+    //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
         return joystick.joyread(xpin, ypin);
@@ -688,6 +696,9 @@ namespace grove {
      * 
      */
     //% blockId=ggesture block="%key"
+    //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
+    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=4
+    //% g.fieldOptions.tooltips="false" g.fieldOptions.width="250"
     //% group="Sensor"
     export function ggesture(g: GroveGesture): boolean {
         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  ){
@@ -731,6 +742,12 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_joystick_create_event block="on Key|%key at |%xpin|and|%ypin"
+    //% key.fieldEditor="gridpicker" key.fieldOptions.columns=4
+    //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
+    //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
+    //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
+    //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
+    //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
 
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
@@ -753,6 +770,10 @@ namespace grove {
      * Set up Grove - Uart WiFi V2 to connect to  Wi-Fi
      */
     //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd"
+    //% txPin.fieldEditor="gridpicker" txPin.fieldOptions.columns=4
+    //% txPin.fieldOptions.tooltips="false" txPin.fieldOptions.width="250"
+    //% rxPin.fieldEditor="gridpicker" rxPin.fieldOptions.columns=4
+    //% rxPin.fieldOptions.tooltips="false" rxPin.fieldOptions.width="250"
     //% group="Communication"
     //% txPin.defl=SerialPin.P15
     //% rxPin.defl=SerialPin.P1
