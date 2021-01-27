@@ -319,69 +319,22 @@ namespace grove {
         //% group="Display"
         //% weight=50
         show(dispData: number)
-        {       
-            let compare_01:number = dispData % 100;
-            let compare_001:number = dispData % 1000;
-
-            if(dispData < 10)
+        {
+            if((dispData == 0x7f) || ((dispData <= 9999)))
             {
-                this.bit(dispData, 3);
-                this.bit(0x7f, 2);
-                this.bit(0x7f, 1);
-                this.bit(0x7f, 0);                
-            }
-            else if(dispData < 100)
-            {
-                this.bit(dispData % 10, 3);
-                if(dispData > 90){
-                    this.bit(9, 2);
-                } else{
-                    this.bit(Math.floor(dispData / 10) % 10, 2);
-                }
+                let segData = 0;
                 
-                this.bit(0x7f, 1);
-                this.bit(0x7f, 0);
-            }
-            else if(dispData < 1000)
-            {
-                this.bit(dispData % 10, 3);
-                if(compare_01 > 90){
-                    this.bit(9, 2);
-                } else{
-                    this.bit(Math.floor(dispData / 10) % 10, 2);
-                }
-                if(compare_001 > 900){
-                    this.bit(9, 1);
-                } else{
-                    this.bit(Math.floor(dispData / 100) % 10, 1);
-                }
-                this.bit(0x7f, 0);
-            }
-            else if(dispData < 10000)
-            {
-                this.bit(dispData % 10, 3);
-                if(compare_01 > 90){
-                    this.bit(9, 2);
-                } else{
-                    this.bit(Math.floor(dispData / 10) % 10, 2);
-                }
-                if(compare_001 > 900){
-                    this.bit(9, 1);
-                } else{
-                    this.bit(Math.floor(dispData / 100) % 10, 1);
-                }
-                if(dispData > 9000){
-                    this.bit(9, 0);
-                } else{
-                    this.bit(Math.floor(dispData / 1000) % 10, 0);
-                }
-            }
-            else 
-            {
-                this.bit(9, 3);
-                this.bit(9, 2);
-                this.bit(9, 1);
-                this.bit(9, 0);
+                segData = this.coding(dispData);
+                this.start();
+                this.writeByte(0x44);
+                this.stop();
+                this.start();
+                this.writeByte(segData);
+                this.stop();
+                this.start();
+                this.writeByte(0x88 + this.brightnessLevel);
+                this.stop();
+
             }
         }
         
@@ -638,9 +591,13 @@ namespace grove {
     }
     /**
     * (For micro:bit V2 ONLY)Get the distance from Grove-Ultrasonic Sensor, the measuring range is between 2-350cm
+    * @param groveport value of clk pin number
     */
     //% blockId=grove_ultrasonic_v2
     //% block="(V2)Ultrasonic Sensor $groveport|: distance in $Unit"
+    //% groveport.fieldEditor="gridpicker" groveport.fieldOptions.columns=4
+    //% groveport.fieldOptions.tooltips="false" groveport.fieldOptions.width="250"
+    //% groveport.defl=DigitalPin.C16
     //% group="Sensor"
     //% weight=77
     export function grove_ultrasonic_v2(groveport: GrovePin, Unit: DistanceUnit): number {
