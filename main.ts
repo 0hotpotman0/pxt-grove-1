@@ -59,7 +59,6 @@ enum GroveGesture {
     Wave = 9
 }
 
-
 enum GroveJoystickKey {
 
     //% block="→ Right"
@@ -715,7 +714,7 @@ namespace grove {
      * @param gesture type of gesture to detect
      * @param handler code to run
      */
-    //% blockId=grove_gesture_create_event block="Gesture Sensor (i2c): when detect|%gesture"
+    //% blockId=grove_gesture_create_event block="Gesture Sensor (I2C): when detect |%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
