@@ -604,12 +604,13 @@ namespace grove {
 
     /**
     * This block for micrGet the distance from Ultrasonic Sensor, the measuring range is between 2-350cm
+    * @param groveport value of clk pin number
     */
     //% blockId=grove_ultrasonic
     //% block="Ultrasonic Sensor $groveport|: distance in $Unit"
-    //% GrovePin.fieldEditor="gridpicker" GrovePin.fieldOptions.columns=4
-    //% GrovePin.fieldOptions.tooltips="false" GrovePin.fieldOptions.width="250"
-    //% clkPin.defl=DigitalPin.C16
+    //% groveport.fieldEditor="gridpicker" groveport.fieldOptions.columns=4
+    //% groveport.fieldOptions.tooltips="false" groveport.fieldOptions.width="250"
+    //% groveport.defl=DigitalPin.C16
     //% group="Sensor"  
     //% weight=78
     export function grove_ultrasonic(groveport: GrovePin, Unit: DistanceUnit): number {
