@@ -35,6 +35,15 @@ let TubeTab: number [] = [
 ];
 
 /**
+ * Grove I2C
+ */
+enum G1_I2C {
+
+    //% block="I2C"
+    Right = 1
+}
+
+/**
  * Grove Gestures
  */
 enum GroveGesture {
@@ -714,12 +723,16 @@ namespace grove {
      * @param gesture type of gesture to detect
      * @param handler code to run
      */
-    //% blockId=grove_gesture_create_event block="Gesture Sensor (I2C): when detect |%gesture"
+    //% blockId=grove_gesture_create_event block="Gesture Sensor %G_I2C|: when detect |%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
     //% weight=600
-    export function onGesture(gesture: GroveGesture, handler: () => void) {
+    export function onGesture(G_I2C:G1_I2C, gesture: GroveGesture, handler: () => void) {
+        let v_a = G_I2C;
+        if(v_a == 1) {
+
+        }
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
         control.inBackground(() => {
