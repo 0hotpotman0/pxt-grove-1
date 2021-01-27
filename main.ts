@@ -691,22 +691,21 @@ namespace grove {
         return joystick.joyread(xpin, ypin);
     }
 
-   /**
-     * Check if a specified gesture is detected and return as "Ture" or "False"
-     * 
-     */
-    //% blockId=ggesture block="%key"
-    //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=4
-    //% g.fieldOptions.width="250"
-    //% group="Sensor"
-    export function ggesture(g: GroveGesture): boolean {
-        if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
-            return true;
-        
-        // else
-        //     return false;
-    }
+//    /**
+//      * Check if a specified gesture is detected and return as "Ture" or "False"
+//      * 
+//      */
+//     //% blockId=ggesture block="%key"
+//     //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
+//     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=4
+//     //% g.fieldOptions.width="250"
+//     //% group="Sensor"
+//     export function ggesture(g: GroveGesture): boolean {
+//         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
+//             return true;
+//         else
+//              return false;
+//     }
     
     /**
      * Do something when a specified gesture is detected
@@ -716,7 +715,6 @@ namespace grove {
     //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
-    
     //% group="Sensor"
     export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
