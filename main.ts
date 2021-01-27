@@ -59,11 +59,6 @@ enum GroveGesture {
     Wave = 9
 }
 
-enum Choice_i2c {
-
-//% block="I2C"
-fake_I2C 
-}
 
 enum GroveJoystickKey {
 
@@ -717,24 +712,19 @@ namespace grove {
     
     /**
      * Do something when a specified gesture is detected
-     * @param fake_i2cc fake_i2c port
      * @param gesture type of gesture to detect
      * @param handler code to run
      */
-    //% blockId=grove_gesture_create_event block="Gesture Sensor|%fake_i2cc| : when detect|%gesture"
+    //% blockId=grove_gesture_create_event block="Gesture Sensor (i2c): when detect|%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
     //% weight=600
-    export function onGesture(fake_i2cc: Choice_i2c, gesture: GroveGesture, handler: () => void) {
-        let k; 
-        k = fake_i2cc;
+    export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
-        
         control.inBackground(() => {
             while(true) {
-                
                 const gesture = paj7620.read();
                 if (gesture != lastGesture) {
                     lastGesture = gesture;
