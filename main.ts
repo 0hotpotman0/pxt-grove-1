@@ -696,8 +696,8 @@ namespace grove {
      * @param g type of g to detect
      */
     // % blockId=ggesture block="%key"
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=4
-    //% g.fieldOptions.tooltips="false" g.fieldOptions.width="250"
+    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=3
+    //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
     //% group="Sensor"
     export function ggesture(g: GroveGesture): boolean {
         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
