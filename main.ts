@@ -692,10 +692,10 @@ namespace grove {
     }
 
    /**
-     * Check if a specified gesture is detected and return as "Ture" or "False"
-     * @param g type of g to detect
+     * Check if a specified gesture 
+     * is detected and return as "Ture" or "False"
      */
-    // % blockId=ggesture block="%key"
+    //% blockId=ggesture block="%key"
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=3
     //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
     //% group="Sensor"
