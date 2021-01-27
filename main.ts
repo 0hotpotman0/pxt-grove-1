@@ -695,9 +695,7 @@ namespace grove {
      * Check if a specified gesture is detected and return as "Ture" or "False"
      * @param g type of g to detect
      */
-  
-
-    //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
+    // % blockId=ggesture block="%key"
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=4
     //% g.fieldOptions.tooltips="false" g.fieldOptions.width="250"
     //% group="Sensor"
