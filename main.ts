@@ -318,12 +318,72 @@ namespace grove {
         //% dispData.min=0 dispData.max=9999
         //% group="Display"
         //% weight=50
+        show(dispData: number)
+        {       
+            let compare_01:number = dispData % 100;
+            let compare_001:number = dispData % 1000;
 
-        export function DispData(dispData: number){
-            setDispData(dispData);         // 搞这个点阵表和可以拉的数字，然后就是根据那个表格一个一个改，最后是翻译
-
+            if(dispData < 10)
+            {
+                this.bit(dispData, 3);
+                this.bit(0x7f, 2);
+                this.bit(0x7f, 1);
+                this.bit(0x7f, 0);                
+            }
+            else if(dispData < 100)
+            {
+                this.bit(dispData % 10, 3);
+                if(dispData > 90){
+                    this.bit(9, 2);
+                } else{
+                    this.bit(Math.floor(dispData / 10) % 10, 2);
+                }
+                
+                this.bit(0x7f, 1);
+                this.bit(0x7f, 0);
+            }
+            else if(dispData < 1000)
+            {
+                this.bit(dispData % 10, 3);
+                if(compare_01 > 90){
+                    this.bit(9, 2);
+                } else{
+                    this.bit(Math.floor(dispData / 10) % 10, 2);
+                }
+                if(compare_001 > 900){
+                    this.bit(9, 1);
+                } else{
+                    this.bit(Math.floor(dispData / 100) % 10, 1);
+                }
+                this.bit(0x7f, 0);
+            }
+            else if(dispData < 10000)
+            {
+                this.bit(dispData % 10, 3);
+                if(compare_01 > 90){
+                    this.bit(9, 2);
+                } else{
+                    this.bit(Math.floor(dispData / 10) % 10, 2);
+                }
+                if(compare_001 > 900){
+                    this.bit(9, 1);
+                } else{
+                    this.bit(Math.floor(dispData / 100) % 10, 1);
+                }
+                if(dispData > 9000){
+                    this.bit(9, 0);
+                } else{
+                    this.bit(Math.floor(dispData / 1000) % 10, 0);
+                }
+            }
+            else 
+            {
+                this.bit(9, 3);
+                this.bit(9, 2);
+                this.bit(9, 1);
+                this.bit(9, 0);
+            }
         }
- 
         
         /**
          * Set the brightness level of 4 digit display
@@ -547,7 +607,10 @@ namespace grove {
     */
     //% blockId=grove_ultrasonic
     //% block="Ultrasonic Sensor $groveport|: distance in $Unit"
-    //% group="Sensor"
+    //% GrovePin.fieldEditor="gridpicker" GrovePin.fieldOptions.columns=4
+    //% GrovePin.fieldOptions.tooltips="false" GrovePin.fieldOptions.width="250"
+    //% clkPin.defl=DigitalPin.C16
+    //% group="Sensor"  
     //% weight=78
     export function grove_ultrasonic(groveport: GrovePin, Unit: DistanceUnit): number {
         let duration = 0;
@@ -612,7 +675,7 @@ namespace grove {
      */
     //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|and|%dataPin"
     //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=4
-    //% group="Display"
+    //% group="Display" 
     //% weight=60
     //% clkPin.fieldOptions.tooltips="false" clkPin.fieldOptions.width="250"
     //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=4
