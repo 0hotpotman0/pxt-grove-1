@@ -62,7 +62,7 @@ enum GroveGesture {
 enum Choice_i2c {
 
 //% block="I2C"
-fake_I2C
+fake_I2C 
 }
 
 enum GroveJoystickKey {
@@ -727,10 +727,14 @@ namespace grove {
     //% group="Sensor"
     //% weight=600
     export function onGesture(fake_i2cc: Choice_i2c, gesture: GroveGesture, handler: () => void) {
+        let k; 
+        k = fake_i2cc;
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
+        
         control.inBackground(() => {
             while(true) {
+                
                 const gesture = paj7620.read();
                 if (gesture != lastGesture) {
                     lastGesture = gesture;
