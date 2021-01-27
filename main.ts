@@ -701,9 +701,9 @@ namespace grove {
     //% g.fieldOptions.width="250"
     //% group="Sensor"
     export function ggesture(g: GroveGesture): boolean {
-        if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  ){
+        if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
             return true;
-        }
+        
         // else
         //     return false;
     }
