@@ -714,7 +714,7 @@ namespace grove {
      * @param gesture type of gesture to detect
      * @param handler code to run
      */
-    //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
+    //% blockId=grove_gesture_create_event block="Gesture Sensor|%paj7620|when detect|%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
