@@ -695,14 +695,14 @@ namespace grove {
      * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
      * @param key type of joystick to detect
      */
-    //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin|: %key"
+    //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     //% weight=1
-    export function getJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin): boolean {
+    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin, key: GroveJoystickKey): boolean {
         const key_1 = joystick.joyread(xpin, ypin);
         lastJoystick = key; 
         if (key_1 == lastJoystick) 
@@ -770,7 +770,7 @@ namespace grove {
      * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="Joystick |%xpin|and|%ypin|: when |%key"
+    //% blockId=grove_joystick_create_event block="Joystick %xpin|and| %ypin|: when| %key"
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=4
     //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
@@ -779,7 +779,7 @@ namespace grove {
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     //% weight=2
-    export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
+    export function onJoystick( xpin: AnalogPin, ypin: AnalogPin,key: GroveJoystickKey, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
             while(true) {
@@ -798,7 +798,7 @@ namespace grove {
     /**
      * Set up Grove - Uart WiFi V2 to connect to  Wi-Fi
      */
-    //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd"
+    //% block="UART WIFI: Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd"
     //% txPin.fieldEditor="gridpicker" txPin.fieldOptions.columns=3
     //% txPin.fieldOptions.tooltips="false" txPin.fieldOptions.width="200"
     //% rxPin.fieldEditor="gridpicker" rxPin.fieldOptions.columns=3
@@ -836,7 +836,7 @@ namespace grove {
     /**
      * Check if Grove - Uart WiFi V2 is connected to Wifi
      */
-    //% block="Wifi OK?"
+    //% block="UART WIFI: Wifi connected?"
     //% group="Communication"
     //% weight=4
     export function wifiOK() {
@@ -846,7 +846,7 @@ namespace grove {
     /**
      * Send data to ThinkSpeak
      */
-    //% block="Send Data to your ThinkSpeak Channel|Write API Key %apiKey|Field1 %field1|Field2 %field2|Field3 %field3|Field4 %field4|Field5 %field5|Field6 %field6|Field7 %field7|Field8 %field8"
+    //% block="UART WIFI: Send Data to your ThinkSpeak Channel|Write API Key %apiKey|Field1 %field1|Field2 %field2|Field3 %field3|Field4 %field4|Field5 %field5|Field6 %field6|Field7 %field7|Field8 %field8"
     //% group="Communication"
     //% apiKey.defl="your Write API Key"
     //% weight=1
@@ -894,7 +894,7 @@ namespace grove {
     /**
      * Send data to IFTTT
      */
-    //% block="Send Data to your IFTTT Event|Event %event|Key %key|value1 %value1|value2 %value2|value3 %value3"
+    //% block="UART WIFI: Send Data to your IFTTT Event|Event %event|Key %key|value1 %value1|value2 %value2|value3 %value3"
     //% group="Communication"
     //% event.defl="your Event"
     //% key.defl="your Key"
