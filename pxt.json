@@ -4,13 +4,15 @@
     "description": "A Microsoft MakeCode package for Seeed Studio Grove module",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "microphone": "*"
     },
     "files": [
         "README.md",
         "main.ts",
         "_locales/ja/Grove-strings.json",
-        "_locales/de/Grove-strings.json"
+        "_locales/de/Grove-strings.json",
+        "_locales/zh/Grove-strings.json"
     ],
     "testFiles": [
         "test.ts"
