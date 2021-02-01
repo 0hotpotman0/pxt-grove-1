@@ -50,7 +50,7 @@
   "grove.TM1637.show|block": "四位数码管: |%4Digit|显示|%dispData",
   "grove.createDisplay|block": "四位数码管 ：|%clkPin|和|%dataPin",
   "grove.getGestureModel|block": "手势识别传感器 %G_I2C: 值",
-  "grove.getJoystick|block": "摇杆 %xpin| %ypin|: 当 |%key",
+  "grove.getJoystick|block": "摇杆 |%xpin|和|%ypin|: 当 |%key",
   "grove.ggesture|block": "手势识别传感器 %G_I2C: 检测到|%key",
   "grove.grove_loudnesssensor|block": "响度传感器 $analogport|: 值",
   "grove.grove_minifanOnOff|block": "迷你风扇 $groveport|: 状态 $on",
