@@ -680,7 +680,7 @@ namespace grove {
      * Get the gesture sensor value, 0 refers to none detected, 1 - 9 represents 9 diffrent gestures
      * 
      */
-    //% blockId=grove_getgesture block="get gesture model"
+    //% blockId=grove_getgesture block="Gesture Sensor (I2C): value"
     //% group="Sensor"
     //% weight=500
     export function getGestureModel(): number {
@@ -706,7 +706,7 @@ namespace grove {
      * Check if a specified gesture is detected and return as "Ture" or "False"
      * @param g type of g to detect
      */
-    //% blockId=ggesture block="%key"
+    //% blockId=ggesture block="Gesture Sensor (I2C): |%key|detected"
     //% g.fieldEditor="gridpicker" g.fieldOptions.columns=3
     //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
     //% group="Sensor"
@@ -722,6 +722,7 @@ namespace grove {
      * Do something when a specified gesture is detected
      * @param gesture type of gesture to detect
      * @param handler code to run
+     * @param G_I2C type of I2C
      */
     //% blockId=grove_gesture_create_event block="Gesture Sensor %G_I2C|: when detect |%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
