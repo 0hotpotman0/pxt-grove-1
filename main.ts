@@ -692,18 +692,23 @@ namespace grove {
         return paj7620.read();
     }
     /**
-     * Do something when the joystick is pushed to a specified direction
-     * 
+     * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
+     * @param key type of joystick to detect
      */
-    //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin"
+    //% blockId=grove_getjoystick block="joystick|%xpin|and|%ypin|: %key"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
-    //% weight=300
-    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
-        return joystick.joyread(xpin, ypin);
+    //% weight=1
+    export function getJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin): Boolean {
+        const key_1 = joystick.joyread(xpin, ypin);
+        lastJoystick = key; 
+        if (key_1 == lastJoystick) 
+            return true;
+        else
+            return false;
     }
 
    /**
@@ -759,13 +764,13 @@ namespace grove {
 
 
     /**
-     * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
+     * Do something when the joystick is pushed to a specified direction
      * @param key type of joystick to detect
      * @param xpin
      * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on Key|%key at |%xpin|and|%ypin"
+    //% blockId=grove_joystick_create_event block="Joystick |%xpin|and|%ypin|: when |%key"
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=4
     //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
@@ -773,7 +778,7 @@ namespace grove {
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
-    //% weight=200
+    //% weight=2
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
