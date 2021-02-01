@@ -702,7 +702,7 @@ namespace grove {
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
     //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
     //% weight=1
-    export function getJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin): Boolean {
+    export function getJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin): boolean {
         const key_1 = joystick.joyread(xpin, ypin);
         lastJoystick = key; 
         if (key_1 == lastJoystick) 
