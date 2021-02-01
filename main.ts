@@ -683,7 +683,11 @@ namespace grove {
     //% blockId=grove_getgesture block="Gesture Sensor %G_I2C: value"
     //% group="Sensor"
     //% weight=500
-    export function getGestureModel(): number {
+    export function getGestureModel(G_I2C:G1_I2C): number {
+        let v_a = G_I2C;
+        if(v_a == 1) {
+
+        }
         paj7620.init();
         return paj7620.read();
     }
@@ -712,7 +716,11 @@ namespace grove {
     //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
     //% group="Sensor"
     //% weight=400
-    export function ggesture(g: GroveGesture): boolean {
+    export function ggesture(G_I2C:G1_I2C, g: GroveGesture): boolean {
+        let v_a = G_I2C;
+        if(v_a == 1) {
+
+        }
         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
             return true;
         else
