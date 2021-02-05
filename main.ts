@@ -697,13 +697,12 @@ namespace grove {
      * @param key type of joystick to detect
      */
     //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
-    //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% key.defl="GroveJoystickKey.UL"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
-    //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
+    //% group="Sensor" xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% weight=1
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin, key: GroveJoystickKey): boolean {
         const key_1 = joystick.joyread(xpin, ypin);
