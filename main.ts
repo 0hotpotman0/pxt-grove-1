@@ -697,6 +697,7 @@ namespace grove {
      * @param key type of joystick to detect
      */
     //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
+    //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% key.defl="GroveJoystickKey.UL"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
