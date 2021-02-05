@@ -48,23 +48,23 @@ enum G1_I2C {
  */
 enum GroveGesture {
 
-    //% block="swipe Right"
+    //% block="1 swipe Right"
     Right = 1,
-    //% block="swipe Left"
+    //% block="2 swipe Left"
     Left = 2,
-    //% block="swipe Up"
+    //% block="3 swipe Up"
     Up = 3,
-    //% block="swipe Down"
+    //% block="4 swipe Down"
     Down = 4,
-    //% block="object close"
+    //% block="5 object close"
     Forward = 5,
-    //% block="object away"
+    //% block="6 object away"
     Backward = 6,
-    //% block="circle-CW"
+    //% block="7 circle-CW"
     Clockwise = 7,
-    //% block="circle-CCW"
+    //% block="8 circle-CCW"
     Anticlockwise = 8,
-    //% block="finger waving"
+    //% block="9 finger waving"
     Wave = 9
 }
 
@@ -143,7 +143,7 @@ enum GroveAnalogPin {
 }
 
 enum DistanceUnit {
-    //% block="cm"
+    //% block="cm"Display
     cm,
     //% block="inch"
     inch
@@ -323,7 +323,7 @@ namespace grove {
          * @param dispData value of number
          */
 
-        //% blockId=grove_tm1637_display_number block="4-Digit Display: |%4Digit|show number|%dispData"
+        //% blockId=grove_tm1637_display_number block="4-Digit Display: |%4DigitDisplay|show number|%dispData"
         //% dispData.min=0 dispData.max=9999
         //% group="Display"
         //% weight=50
@@ -351,7 +351,7 @@ namespace grove {
          * Set the brightness level of 4 digit display
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block="4-Digit Display: |%4Digit|set brightness to|%level"
+        //% blockId=grove_tm1637_set_display_level block="4-Digit Display: |%4DigitDisplay|set brightness to|%level"
         //% level.min=0 level.max=7
         //% group="Display"
         //% weight=20
@@ -370,7 +370,7 @@ namespace grove {
          * @param dispData value of number
          * @param bitAddr value of bit number
          */
-        //% blockId=grove_tm1637_display_bit block="4-Digit Display: |%4Digit|show digit|%dispData|at bit|%bitAddr"
+        //% blockId=grove_tm1637_display_bit block="4-Digit Display: |%4DigitDisplay|show digit|%dispData|at bit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
         //% group="Display"
@@ -401,12 +401,12 @@ namespace grove {
          * Turn ON or OFF the colon of the 4 Digit Display
          * @param pointEn value of point switch
          */
-        //% blockId=grove_tm1637_display_point block="4-Digit Display: |%4Digit|colon|%point"
+        //% blockId=grove_tm1637_display_point block="4-Digit Display: |%4DigitDisplay|colon|$on"
         //% group="Display"
         //% weight=30
-        point(point: boolean)
+        point(on: boolean)
         {
-            this.pointFlag = point;
+            this.pointFlag = on;
             
             this.bit(this.buf[0], 0x00);
             this.bit(this.buf[1], 0x01);
@@ -417,7 +417,7 @@ namespace grove {
         /**
          * Turn off all segments the 4 digit display
          */
-        //% blockId=grove_tm1637_display_clear block="4-Digit Display: |%4Digit|off"
+        //% blockId=grove_tm1637_display_clear block="4-Digit Display: |%4DigitDisplay|off"
         //% group="Display"
         //% weight=10
         clear()
@@ -660,7 +660,7 @@ namespace grove {
     //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=4
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     //% dataPin.fieldOptions.tooltips="false" dataPin.fieldOptions.width="250"
-    //% blockSetVariable=4digit
+    //% blockSetVariable=4DigitDisplay
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): TM1637
     {
         let display = new TM1637();
@@ -668,7 +668,7 @@ namespace grove {
         display.buf = pins.createBuffer(4);
         display.clkPin = clkPin;
         display.dataPin = dataPin;
-        display.brightnessLevel = 0;
+        display.brightnessLevel = 7;
         display.pointFlag = false;
         display.clear();
         
@@ -740,6 +740,7 @@ namespace grove {
      */
     //% blockId=grove_gesture_create_event block="Gesture Sensor %G_I2C|: when detect |%gesture"
     //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
+    //% gesture.defl=GroveGesture.2
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
     //% weight=600
@@ -777,7 +778,7 @@ namespace grove {
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
-    //% group="Sensor" xpin.defl=AnalogPin.C16 ypin.defl=AnalogPin.C17
+    //% group="Sensor" xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% weight=2
     export function onJoystick( xpin: AnalogPin, ypin: AnalogPin,key: GroveJoystickKey, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
