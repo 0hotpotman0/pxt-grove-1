@@ -78,9 +78,9 @@ enum GroveJoystickKey {
     Up = 3,
     //% block="↓ Down"
     Down = 4,
-    //% block="UpperLeft"
+    //% block="UpLeft"
     UL = 5,
-    //% block="UpperRight"
+    //% block="UpRight"
     UR = 6,
     //% block="LowerLeft"
     LL = 7,
@@ -353,6 +353,7 @@ namespace grove {
          */
         //% blockId=grove_tm1637_set_display_level block="4-Digit Display: |%4DigitDisplay|set brightness to|%level"
         //% level.min=0 level.max=7
+        //% level.defl=7
         //% group="Display"
         //% weight=20
         set(level: number)
@@ -399,13 +400,13 @@ namespace grove {
         
         /**
          * Turn ON or OFF the colon of the 4 Digit Display
-         * @param pointEn value of point switch
          */
         //% blockId=grove_tm1637_display_point block="4-Digit Display: |%4DigitDisplay|colon|$on"
+        //% on.shadow="toggleOnOff"
+        //% on.defl="true"
         //% group="Display"
         //% weight=30
-        point(on: boolean)
-        {
+        point(on: boolean){
             this.pointFlag = on;
             
             this.bit(this.buf[0], 0x00);
@@ -658,7 +659,7 @@ namespace grove {
     //% weight=60
     //% clkPin.fieldOptions.tooltips="false" clkPin.fieldOptions.width="250"
     //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=4
-    //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
+    //% clkPin.defl=DigitalPin.P0 dataPin.defl=DigitalPin.P1
     //% dataPin.fieldOptions.tooltips="false" dataPin.fieldOptions.width="250"
     //% blockSetVariable=4DigitDisplay
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): TM1637
@@ -696,6 +697,7 @@ namespace grove {
      * @param key type of joystick to detect
      */
     //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
+    //% key.defl="GroveJoystickKey.UL"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
@@ -772,6 +774,8 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_joystick_create_event block="Joystick %xpin|and| %ypin|: when| %key"
+    //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
+    //% key.defl=GroveJoystickKey.UL
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=4
     //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
