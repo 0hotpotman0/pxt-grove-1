@@ -753,7 +753,8 @@ namespace grove {
     //% weight=1
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin, key: GroveJoystickKey): boolean {
         const key_1 = joystick.joyread(xpin, ypin);
-        if (key_1 == GroveJoystickKey.Down || key_1 == GroveJoystickKey.LL || key_1 == GroveJoystickKey.LR || key_1 == GroveJoystickKey.Left || key_1 == GroveJoystickKey.Press || key_1 == GroveJoystickKey.Right || key_1 == GroveJoystickKey.UL || key_1 == GroveJoystickKey.UR || key_1 == GroveJoystickKey.Up) 
+        lastJoystick = key; 
+        if (key_1 == 1) 
             return true;
         else
             return false;
@@ -772,8 +773,8 @@ namespace grove {
     export function ggesture(G_I2C:G1_I2C, g: GroveGesture): boolean {
         let v_a = G_I2C;
         if(v_a == 1) {
-
         }
+        
         if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
             return true;
         else
