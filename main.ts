@@ -70,24 +70,25 @@ enum GroveGesture {
 
 enum GroveJoystickKey {
 
-    //% block="→ Right"
-    Right = 1,
-    //% block="← Left"
-    Left = 2,
-    //% block="↑ Up"
-    Up = 3,
-    //% block="↓ Down"
-    Down = 4,
     //% block="UpLeft"
-    UL = 5,
+    UL = 1,
+    //% block="↑ Up"
+    Up = 2,
     //% block="UpRight"
-    UR = 6,
+    UR = 3,
+    //% block="← Left"
+    Left = 4,
+    //% block="pressed"
+    Press = 5,
+    //% block="→ Right"
+    Right = 6,
     //% block="LowerLeft"
     LL = 7,
+    //% block="↓ Down"
+    Down = 8,
     //% block="LowerRight"
-    LR = 8,
-    //% block="pressed"
-    Press = 9
+    LR = 9
+    
 }
 
 enum GrovePin {
@@ -744,7 +745,9 @@ namespace grove {
      * @param key type of joystick to detect
      */
     //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
-    //% key.defl="GroveJoystickKey.UL"
+    //% key.defl=GroveJoystickKey.UL
+    //% key.fieldEditor="gridpicker" key.fieldOptions.columns=3
+    //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
@@ -753,8 +756,8 @@ namespace grove {
     //% weight=1
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin, key: GroveJoystickKey): boolean {
         const key_1 = joystick.joyread(xpin, ypin);
-        lastJoystick = key; 
-        if (key_1 == 1) 
+        const lastJoystick_1 = key; 
+        if (key_1 == lastJoystick_1) 
             return true;
         else
             return false;
@@ -788,7 +791,7 @@ namespace grove {
      * @param G_I2C type of I2C
      */
     //% blockId=grove_gesture_create_event block="Gesture Sensor %G_I2C|: when detect |%gesture"
-    //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=4
+    //% gesture.fieldEditor="gridpicker" gesture.fieldOptions.columns=3
     //% gesture.defl=GroveGesture.2
     //% gesture.fieldOptions.tooltips="false" gesture.fieldOptions.width="250"
     //% group="Sensor"
@@ -823,13 +826,13 @@ namespace grove {
     //% blockId=grove_joystick_create_event block="Joystick %xpin|and| %ypin|: when| %key"
     //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% key.defl=GroveJoystickKey.UL
-    //% key.fieldEditor="gridpicker" key.fieldOptions.columns=4
+    //% key.fieldEditor="gridpicker" key.fieldOptions.columns=3
     //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
     //% xpin.fieldEditor="gridpicker" xpin.fieldOptions.columns=4
     //% xpin.fieldOptions.tooltips="false" xpin.fieldOptions.width="250"
     //% ypin.fieldEditor="gridpicker" ypin.fieldOptions.columns=4
     //% ypin.fieldOptions.tooltips="false" ypin.fieldOptions.width="250"
-    //% group="Sensor" xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
+    //% group="Sensor" 
     //% weight=2
     export function onJoystick( xpin: AnalogPin, ypin: AnalogPin,key: GroveJoystickKey, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
