@@ -562,7 +562,7 @@ namespace grove {
     //% weight=99
     export function grove_servo(analogport: GroveAnalogPin, angle: number) {
         let port: number = analogport;
-        pins.servoWritePin(<AnalogPin>port, pins.map(angle, 0, 180, 10, 180));
+        pins.servoWritePin(<AnalogPin>port, pins.map(angle, 0, 180, 0, 180));
     }
     
 
