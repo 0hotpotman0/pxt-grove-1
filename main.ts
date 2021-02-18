@@ -553,11 +553,11 @@ namespace grove {
     * Set the servo angle, the angle is between 0 to 180°
     */
     //% blockId=grove_servo
+    //% angle.defl=90
     //% block="Servo$analogport|: set angle to $angle|°"
     //% analogport.fieldEditor="gridpicker" analogport.fieldOptions.columns=4
     //% analogport.fieldOptions.tooltips="false" analogport.fieldOptions.width="250"
     //% angle.min=0 angle.max=180
-    //% angle.defl=90
     //% group="Motor" 
     //% weight=99
     export function grove_servo(analogport: GroveAnalogPin, angle: number) {
