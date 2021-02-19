@@ -777,8 +777,8 @@ namespace grove {
         let v_a = G_I2C;
         if(v_a == 1) {
         }
-        
-        if (g==1 || g==2 || g==3 || g==4 || g==5 || g==6 || g==7 || g==8 || g==9  )
+        const k = paj7620.read();
+        if (k==g)
             return true;
         else
              return false;
