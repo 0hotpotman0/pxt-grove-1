@@ -763,27 +763,7 @@ namespace grove {
             return false;
     }
 
-   /**
-     * Check if a specified gesture is detected and return as "True" or "False"
-     * @param g type of g to detect
-     * @param G_I2C type of I2C
-     */
-    //% blockId=ggesture block="Gesture Sensor %G_I2C: |%key|detected"
-    //% g.fieldEditor="gridpicker" g.fieldOptions.columns=3
-    //% g.fieldOptions.tooltips="false" g.fieldOptions.width="200"
-    //% group="Sensor"
-    //% weight=400
-    export function ggesture(G_I2C:G1_I2C, g: GroveGesture): boolean {
-        let v_a = G_I2C;
-        if(v_a == 1) {
-        }
-        paj7620.init();
-        const k = paj7620.read();
-        if (k==g)
-            return true;
-        else
-             return false;
-    }
+
     
     /**
      * Do something when a specified gesture is detected
