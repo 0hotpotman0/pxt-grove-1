@@ -701,7 +701,7 @@ namespace grove {
      * @param clkPin value of clk pin number
      * @param dataPin value of data pin number
      */
-    //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|and|%dataPin"
+    //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|%dataPin"
     //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=4
     //% group="Display" 
     //% weight=60
@@ -726,7 +726,7 @@ namespace grove {
  
 
     /**
-     * Get the gesture sensor value, 0 refers to none detected, 1 - 9 represents 9 diffrent gestures
+     * Get the gesture sensor value, 0 refers to none detected, 1 - 9 represents 9 different gestures
      * @param G_I2C type of I2C
      */
     //% blockId=grove_getgesture block="Gesture Sensor %G_I2C: value"
@@ -741,10 +741,10 @@ namespace grove {
         return paj7620.read();
     }
     /**
-     * Check if the joystick is being pressed or pushed to a specified direction and return as "Ture" or "False"
+     * Check if the joystick is being pressed or pushed to a specified direction and return as "True" or "False"
      * @param key type of joystick to detect
      */
-    //% blockId=grove_getjoystick block="joystick %xpin|and %ypin|: |%key"
+    //% blockId=grove_getjoystick block="joystick %xpin| %ypin|: |%key"
     //% key.defl=GroveJoystickKey.UL
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=3
     //% key.fieldOptions.tooltips="false" key.fieldOptions.width="250"
@@ -764,7 +764,7 @@ namespace grove {
     }
 
    /**
-     * Check if a specified gesture is detected and return as "Ture" or "False"
+     * Check if a specified gesture is detected and return as "True" or "False"
      * @param g type of g to detect
      * @param G_I2C type of I2C
      */
@@ -777,6 +777,7 @@ namespace grove {
         let v_a = G_I2C;
         if(v_a == 1) {
         }
+        paj7620.init();
         const k = paj7620.read();
         if (k==g)
             return true;
@@ -823,7 +824,7 @@ namespace grove {
      * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="Joystick %xpin|and| %ypin|: when| %key"
+    //% blockId=grove_joystick_create_event block="Joystick %xpin | %ypin|: when| %key"
     //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% key.defl=GroveJoystickKey.UL
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=3
