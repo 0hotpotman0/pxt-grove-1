@@ -816,13 +816,14 @@ namespace grove {
     //% group="Sensor" 
     //% weight=2
     export function onJoystick( xpin: AnalogPin, ypin: AnalogPin,key: GroveJoystickKey, handler: () => void) {
+        let lastJoystick_2 = 0;
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
             while(true) {
                 const key = joystick.joyread(xpin, ypin);
-                if (key != lastJoystick) {
+                if (key != lastJoystick_2) {
                     lastJoystick = key; 
-                    control.raiseEvent(joystickEventID, lastJoystick);
+                    control.raiseEvent(joystickEventID, lastJoystick_2);
                 }
                 basic.pause(50);
             }
