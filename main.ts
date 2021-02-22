@@ -78,8 +78,8 @@ enum GroveJoystickKey {
     UR = 3,
     //% block="← Left"
     Left = 4,
-    //% block="pressed"
-    Press = 5,
+    //% block="None"
+    None = 5,
     //% block="→ Right"
     Right = 6,
     //% block="LowerLeft"
@@ -87,7 +87,9 @@ enum GroveJoystickKey {
     //% block="↓ Down"
     Down = 8,
     //% block="LowerRight"
-    LR = 9
+    LR = 9,
+    //% block="pressed"
+    Press = 10
     
 }
 
@@ -509,11 +511,11 @@ namespace grove {
                 else {
                     if (ydata > 600) result = GroveJoystickKey.Up;
                     else if (ydata < 400) result = GroveJoystickKey.Down;
-                    else result = GroveJoystickKey.Right;
+                    else result = GroveJoystickKey.None;
                 }
             }
             else {
-                result =  GroveJoystickKey.Right;
+                result =  GroveJoystickKey.None;
             }
             return result;
         }
@@ -522,7 +524,7 @@ namespace grove {
     const gestureEventId = 3100;
     const joystickEventID = 3101;
     let lastGesture = GroveGesture.Right;
-    let lastJoystick = GroveJoystickKey.Right;
+    let lastJoystick = GroveJoystickKey.None;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let paj7620 = new PAJ7620();
@@ -804,7 +806,7 @@ namespace grove {
      * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="Joystick %xpin | %ypin|: when| %key"
+    //% blockId=grove_joystick_create_event block="Joystick %xpin| %ypin|: when| %key"
     //% xpin.defl=AnalogPin.P0 ypin.defl=AnalogPin.P1
     //% key.defl=GroveJoystickKey.UL
     //% key.fieldEditor="gridpicker" key.fieldOptions.columns=3
@@ -816,14 +818,13 @@ namespace grove {
     //% group="Sensor" 
     //% weight=2
     export function onJoystick( xpin: AnalogPin, ypin: AnalogPin,key: GroveJoystickKey, handler: () => void) {
-        let lastJoystick_2 = 0;
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
             while(true) {
                 const key = joystick.joyread(xpin, ypin);
-                if (key != lastJoystick_2) {
+                if (key != lastJoystick) {
                     lastJoystick = key; 
-                    control.raiseEvent(joystickEventID, lastJoystick_2);
+                    control.raiseEvent(joystickEventID, lastJoystick);
                 }
                 basic.pause(50);
             }
